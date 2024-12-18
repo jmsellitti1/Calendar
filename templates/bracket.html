@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tournament Bracket</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .bracket {
+            display: flex;
+            gap: 50px;
+            overflow-x: auto;
+        }
+        .round {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 1000px;
+        }
+        .match {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 10px;
+            position: relative;
+        }
+        .match img {
+            max-width: 100px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .match .placeholder {
+            width: 100px;
+            height: 130px;
+            background-color: #eaeaea;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .divider {
+            width: 80px;
+            border: none;
+            border-top: 5px dashed #ccc;
+            margin: 50px auto;
+        }
+        /* Dynamic spacing for centering matches */
+        .round[data-round="2"] .match:nth-child(1) {
+            margin-top: 125px;
+        }
+        .round[data-round="2"] .match:nth-child(2) {
+            margin-top: 375px;
+        }
+        .round[data-round="3"] .match:nth-child(1) {
+            margin-top: 250px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Tournament Bracket</h1>
+    </div>
+
+    <div class="bracket">
+        {% for round_number, matches in bracket_data.items() %}
+        <div class="round" data-round="{{ round_number }}">
+            <h2>Round {{ round_number }}</h2>
+            {% for img1, img2 in matches %}
+            <div class="match">
+                <img src="{{ url_for('static', filename='test_images/' + img1) }}" alt="{{ img1 }}">
+                {% if img2 %}
+                <img src="{{ url_for('static', filename='test_images/' + img2) }}" alt="{{ img2 }}">
+                {% else %}
+                <div class="placeholder">Bye</div>
+                {% endif %}
+            </div>
+            {% if not loop.last %}
+            <div class="divider"></div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

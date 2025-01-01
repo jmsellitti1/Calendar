@@ -1,6 +1,7 @@
 from PIL import Image, ExifTags
 import os
 import shutil
+from tqdm import tqdm
 
 def compress_image(image_path, output_path, quality):
     with Image.open(image_path) as img:
@@ -24,8 +25,8 @@ def compress_image(image_path, output_path, quality):
         img.save(output_path, optimize=True, quality=quality)
 
 if __name__ == "__main__":
-    image_folder_path = './Images_Backup/___' # Just so I don't do anything stupid
-    output_path = './Compressed'
+    image_folder_path = './Images_Backup/Nov-Dec'
+    output_path = './Images_Backup/Compressed'
 
     # Clear possible last run from output folder
     if os.path.exists(output_path):
@@ -33,6 +34,6 @@ if __name__ == "__main__":
     os.makedirs(output_path, exist_ok=True)
 
     images = [img for img in os.listdir(image_folder_path) if img.lower().endswith('jpeg')]
-    for img in images:
+    for img in tqdm(images):
         compress_image(os.path.join(image_folder_path, img), os.path.join(output_path, img), 25) #Manually change quality as desired
         

@@ -6,17 +6,10 @@ from flask import Flask, render_template, request, redirect, url_for
 app = Flask(__name__)
 
 # Path configuration
-IMAGE_FOLDER = './static/test_images' # Manually set for test/actual images folder
+IMAGE_FOLDER = './static/images' # Manually set for test/actual images folder
 
 
 # HELPER FUNCTIONS
-
-#Remove all files from the selected images folder        
-def clear_folder(folder):
-    for filename in os.listdir(folder):
-        file_path = os.path.join(folder, filename)
-        if os.path.isfile(file_path):
-            os.remove(file_path)
 
 # Start new round with selected images from previous
 def start_new_round():

@@ -1,5 +1,5 @@
 /static/images
 /Images_Backup
-/Compressed
+**/Compressed
 
 **/.DS_Store

@@ -25,7 +25,7 @@ def compress_image(image_path, output_path, quality):
         img.save(output_path, optimize=True, quality=quality)
 
 if __name__ == "__main__":
-    image_folder_path = './Images_Backup/Nov-Dec'
+    image_folder_path = './Images_Backup/___' # Source Folder
     output_path = './Images_Backup/Compressed'
 
     # Clear possible last run from output folder
